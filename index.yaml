@@ -3,6 +3,17 @@ entries:
   zerotier-ingress-helm:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-01-17T20:58:49.042578552Z"
+    description: A Helm chart to connect to private services in your Kubernetes cluster
+      via ZeroTier
+    digest: 94346bc1f973115058a7608f17e1dc217608d2bad47f5e10d4e91fe2ae7ac3c9
+    name: zerotier-ingress-helm
+    type: application
+    urls:
+    - https://github.com/zerotier/helm-charts/releases/download/zerotier-ingress-helm-0.1.1/zerotier-ingress-helm-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-01-17T20:37:57.53890042Z"
     description: A Helm chart for Kubernetes
     digest: 5e7b1a8d0e4e90bcf04ba33c53555f450f6277d451cfb59bf33bc95056484dca
@@ -11,4 +22,4 @@ entries:
     urls:
     - https://github.com/zerotier/helm-charts/releases/download/zerotier-ingress-helm-0.1.0/zerotier-ingress-helm-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-17T20:37:57.538909146Z"
+generated: "2024-01-17T20:58:49.042588261Z"
