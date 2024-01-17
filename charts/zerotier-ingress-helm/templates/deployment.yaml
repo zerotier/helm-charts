@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "zerotier-ingress-helm.fullname" . }}
+  labels:
+    {{- include "zerotier-ingress-helm.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "zerotier-ingress-helm.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "zerotier-ingress-helm.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "zerotier-ingress-helm.serviceAccountName" . }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.zerotier.image.repository }}:{{ .Values.zerotier.image.tag | default "1.12.2" }}"
+          imagePullPolicy: {{ .Values.zerotier.image.pullPolicy }}
+          args:
+            - "{{ .Values.zerotier.networkID }}"
+          env:
+            - name: ZEROTIER_IDENTITY_PUBLIC
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "zerotier-ingress-helm.fullname" . }}-ztidentity
+                  key: identity.public
+            - name: ZEROTIER_IDENTITY_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "zerotier-ingress-helm.fullname" . }}-ztidentity
+                  key: identity.secret
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - mountPath: /dev/net
+              name: dev-net
+          {{- with .Values.zerotier.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+        - name: {{ .Chart.Name }}-nginx
+          image: "{{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag | default "1.25.3-bookworm-zt" }}"
+          imagePullPolicy: {{ .Values.nginx.image.pullPolicy }}
+          env:
+            - name: NGINX_LISTEN_PORT
+              value: "{{ .Values.nginx.listenPort | default 8000 }}"
+            - name: NGINX_PROXY_ADDRESS
+              value: {{ .Values.nginx.proxyAddress }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.nginx.listenPort }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.nginx.resources | nindent 12 }}
+          {{- with .Values.nginx.volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      volumes:
+        - name: dev-net
+          hostPath:
+            path: /dev/net
+      {{- with .Values.volumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
