@@ -9,7 +9,7 @@ nginx:
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
 
-  listenPort: 8080
+  listenPort: 8000
   # Set the proxy address
   # this should be the full host/port combination:  http://someservice.mynamespace.svc.cluster.local:1234
   proxyAddress: ""
@@ -37,7 +37,7 @@ zerotier:
   image:
     repository: zerotier/zerotier
     pullPolicy: IfNotPresent
-    tag: "1.12.2"
+    tag: ""
 
   # ZeroTier Identity
   # Create these values with `zerotier-idtool`
