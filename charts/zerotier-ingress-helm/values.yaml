@@ -7,7 +7,7 @@ nginx:
     repository: zerotier/ztnginx
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: ""
+    tag: 1.25.3-bookworm-zt2
 
   listenPort: 8000
   # Set the proxy address
