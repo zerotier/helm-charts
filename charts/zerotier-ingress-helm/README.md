@@ -16,6 +16,7 @@ Create your values.yaml file.  The following fields are required:
 | ---------- | ----------- |
 | nginx.listenPort | The port Nginx is configured to listen on (default 8000) |
 | nginx.proxyAddress | The URL of the upstream service.  (ex: `http://my-service.my-namespace.svc.cluster.local:1234`) |
+| nginx.proxyTimeout | The timeout (in seconds) for prosied requests (default 60) |
 | zerotier.identity.public | The public ZeroTier identity. Use `zerotier-idtool` to generate an identity on a per-ingress basis.|
 | zerotier.identity.secret | The secret ZeroTier identity. Use `zerotier-idtool` to generate an identity on a per-ingress basis.|
 | zerotier.networkID | The network ID the ZeroTier instance will connect to. |

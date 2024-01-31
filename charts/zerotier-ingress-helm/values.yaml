@@ -13,6 +13,7 @@ nginx:
   # Set the proxy address
   # this should be the full host/port combination:  http://someservice.mynamespace.svc.cluster.local:1234
   proxyAddress: ""
+  proxyTimeout: 60
 
   resources:
     {}

@@ -58,6 +58,8 @@ spec:
               value: "{{ .Values.nginx.listenPort | default 8000 }}"
             - name: NGINX_PROXY_ADDRESS
               value: {{ .Values.nginx.proxyAddress }}
+            - name: NGINX_PROXY_READ_TIMEOUT
+              value: "{{ .Values.nginx.proxyTimeout | default 60 }}"
           ports:
             - name: http
               containerPort: {{ .Values.nginx.listenPort }}
