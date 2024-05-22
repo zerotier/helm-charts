@@ -27,7 +27,7 @@ spec:
       serviceAccountName: {{ include "zerotier-ingress-helm.serviceAccountName" . }}
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.zerotier.image.repository }}:{{ .Values.zerotier.image.tag | default "1.12.2" }}"
+          image: "{{ .Values.zerotier.image.repository }}:{{ .Values.zerotier.image.tag | default "1.14.0" }}"
           imagePullPolicy: {{ .Values.zerotier.image.pullPolicy }}
           args:
             - "{{ .Values.zerotier.networkID }}"
