@@ -37,7 +37,8 @@ spec:
           command:
             - crisp-status-local
           args:
-            - -c /var/lib/crisp-status-local/config.toml
+            - -c 
+            - /var/lib/crisp-status-local/config.toml
             {{- with .Values.args }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
