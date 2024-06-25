@@ -51,7 +51,7 @@ spec:
             {{- toYaml . | nindent 12 }}
             {{- end }}
       volumes:
-        - config-secret:
+        - name: config-secret
           secret:
             secretName: {{ include "crisp-status-local.fullname" . }}-config
             optional: false
