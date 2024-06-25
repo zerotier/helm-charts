@@ -3,6 +3,17 @@ entries:
   crisp-status-local:
   - apiVersion: v2
     appVersion: v1.3.7
+    created: "2024-06-25T20:43:50.332020416Z"
+    description: A Helm chart for Kubernetes that deploys an instance of the Crisp
+      Status Reporter
+    digest: 829bb8c3725f5e9af7b1883339d6dece693966a5788d7d8ebd27cb875d72e6ce
+    name: crisp-status-local
+    type: application
+    urls:
+    - https://github.com/zerotier/helm-charts/releases/download/crisp-status-local-0.1.2/crisp-status-local-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: v1.3.7
     created: "2024-06-25T19:05:11.403362107Z"
     description: A Helm chart for Kubernetes that deploys an instance of the Crisp
       Status Reporter
@@ -67,4 +78,4 @@ entries:
     urls:
     - https://github.com/zerotier/helm-charts/releases/download/zerotier-ingress-helm-0.1.0/zerotier-ingress-helm-0.1.0.tgz
     version: 0.1.0
-generated: "2024-06-25T19:05:11.403381483Z"
+generated: "2024-06-25T20:43:50.332050371Z"
